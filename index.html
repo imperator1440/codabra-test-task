@@ -4,37 +4,41 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Codabra</title>
 </head>
 <body>
-  <form action="POST" class="form">
+  <form class="form" action="POST">
+    <h1 class="form__title">Sign Up</h1>
     <div class="form__elements-container">
-      <div class="form__input-element">
-        <input type="text">
+      <div class="input-element">
+        <input class="input input__text" type="text">
         <label>Name</label>
       </div>
-      <div class="form__input-element">
-        <input type="text">
+      <div class="input-element">
+        <input class="input input__text" type="text">
         <label>Surname</label>
       </div>
-      <div class="form__input-element">
-        <input type="date">
+      <div class="input-element">
+        <input class="input input__date" type="date">
         <label>Date of Birth</label>
       </div>
-      <div class="form__input-element">
-        <input type="mail">
+      <div class="input-element">
+        <input class="input input__email" type="mail">
         <label>Email</label>
       </div>
-      <div class="form__input-element">
-        <input type="password">
+      <div class="input-element">
+        <input class="input input__password" type="password">
         <label>Password</label>
       </div>
-      <div class="form__input-element">
-        <input type="password">
+      <div class="input-element">
+        <input class="input input__confirm-password" type="password">
         <label>Confirm Password</label>
       </div>
-      <button type="submit"></button>
+      <button class="form__submit" type="submit">SIGN UP</button>
     </div>
   </form>
 </body>
+
+<script src="formHandler.js"></script>
 </html>
