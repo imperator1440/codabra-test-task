@@ -60,10 +60,12 @@ email.addEventListener('input', () => {
 
 password.addEventListener('input', () => {
   if (!password.checkValidity()) {
+    password.nextElementSibling.nextElementSibling.classList.add("error__password");
     password.nextElementSibling.nextElementSibling.innerText = "Password must have at least 8 symbols, at least 1 capital letter, at least one digit (1-9), at least 1 special character (!@#$%)";
     isSubmitable = false;
   } else {
     password.nextElementSibling.nextElementSibling.innerText = "";
+    password.nextElementSibling.nextElementSibling.classList.remove("error__password");
     isSubmitable = true;
   }
 });
@@ -91,11 +93,11 @@ form.addEventListener("submit", (e) => {
   if (!isSubmitable) return;
 
   const formData = new FormData();
-  formData.append('name', form.elements.name.value);
-  formData.append('surname', form.elements.surname.value);
-  formData.append('birth', form.elements.birth.value);
-  formData.append('email', form.elements.email.value);
-  formData.append('password', form.elements.password.value);
+  formData.append('name', userName.value);
+  formData.append('surname', surname.value);
+  formData.append('birth', birth.value);
+  formData.append('email', email.value);
+  formData.append('password', password.value);
 
   fetch('https://jsonplaceholder.typicode.com/posts', {
     method: 'POST',

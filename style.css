@@ -48,7 +48,7 @@ font-weight: inherit;
 }
 
 .form {
-  width: 380px;
+  max-width: 380px;
   margin: 60px auto;
   display: flex;
   flex-direction: column;
@@ -112,7 +112,7 @@ label {
 }
 
 .error__password {
-  height: 20px;
+  height: 30px;
 }
 
 .form__submit {
@@ -132,4 +132,11 @@ label {
   color: black;
   background-color: white;
   border: 1px solid black;
+}
+
+@media (max-width: 450px) {
+  .form {
+    margin-top: 0;
+    border: none;
+  }
 }
