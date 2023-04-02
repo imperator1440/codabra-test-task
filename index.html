@@ -8,32 +8,38 @@
   <title>Codabra</title>
 </head>
 <body>
-  <form class="form" action="#">
+  <form class="form" action="#" novalidate>
     <h1 class="form__title">Sign Up</h1>
     <div class="form__elements-container">
       <div class="input-element">
-        <input class="input input__text" name="name" type="text" required minlength="2" maxlength="25">
+        <input class="input" name="name" type="text" required minlength="2" maxlength="25">
         <label>Name</label>
+        <p class="error"></p>
       </div>
       <div class="input-element">
-        <input class="input input__text" name="surname" type="text" required minlength="2" maxlength="25">
+        <input class="input" name="surname" type="text" required minlength="2" maxlength="25">
         <label>Surname</label>
+        <p class="error"></p>
       </div>
       <div class="input-element">
-        <input class="input input__date" name="birth" type="date" required max="2023-03-31">
+        <input class="input" name="birth" type="date" required max="2023-03-31">
         <label class="lable__birth">Date of Birth</label>
+        <p class="error"></p>
       </div>
       <div class="input-element">
-        <input class="input input__email" name="email" type="email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$">
+        <input class="input" name="email" type="email" required pattern="^[^\s@]+@[^\s@]+\.[^\s@]+$">
         <label>Email</label>
+        <p class="error"></p>
       </div>
       <div class="input-element">
-        <input class="input input__password" name="password" type="password" pattern="^(?=.*[A-Z])(?=.*[1-9])(?=.*[!@#$%]).{8,}$">
+        <input class="input" name="password" type="password" pattern="^(?=.*[A-Z])(?=.*[1-9])(?=.*[!@#$%]).{8,}$">
         <label>Password</label>
+        <p class="error error__password"></p>
       </div>
       <div class="input-element">
-        <input class="input input__confirm-password" type="password" required>
+        <input class="input" type="password" required>
         <label>Confirm Password</label>
+        <p class="error"></p>
       </div>
       <button class="form__submit" type="submit">SIGN UP</button>
     </div>

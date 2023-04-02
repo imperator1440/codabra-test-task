@@ -1,6 +1,12 @@
 const form = document.querySelector('.form');
-const inputs = document.querySelectorAll('.input[type=text], .input[type=email], .input[type=password]');
-const confirmPassword = inputs[4];
+const inputs = document.querySelectorAll('.input');
+const userName = inputs[0];
+const surname = inputs[1];
+const birth = inputs[2];
+const email = inputs[3];
+const password = inputs[4];
+const confirmPassword = inputs[5];
+let isSubmitable = true;
 
 inputs.forEach(inputs => inputs.value = "");
 
@@ -12,13 +18,77 @@ inputs.forEach(input => input.addEventListener("blur", () => {
   !input.value && input.nextElementSibling.classList.remove("label_focused");
 }));
 
-confirmPassword.addEventListener("input", () => {
-  const value = confirmPassword.value;
-  if (value !== inputs[3].value) console.log('wrong');
+userName.addEventListener('input', (isSubmitable) => {
+  if (!userName.checkValidity()) {
+    userName.nextElementSibling.nextElementSibling.innerText = "Minimum 2 symbols.";
+    isSubmitable = false;
+  } else {
+    userName.nextElementSibling.nextElementSibling.innerText = "";
+    isSubmitable = true;
+  }
+});
+
+surname.addEventListener('input', () => {
+  if (!surname.checkValidity()) {
+    surname.nextElementSibling.nextElementSibling.innerText = "Minimum 2 symbols.";
+    isSubmitable = false;
+  } else {
+    surname.nextElementSibling.nextElementSibling.innerText = "";
+    isSubmitable = true;
+  }
+});
+
+birth.addEventListener('input', () => {
+  if (!birth.checkValidity()) {
+    birth.nextElementSibling.nextElementSibling.innerText = "Maximum date - today.";
+    isSubmitable = false;
+  } else {
+    birth.nextElementSibling.nextElementSibling.innerText = "";
+    isSubmitable = true;
+  }
+});
+
+email.addEventListener('input', () => {
+  if (!email.checkValidity()) {
+    email.nextElementSibling.nextElementSibling.innerText = "Invalid email.";
+    isSubmitable = false;
+  } else {
+    email.nextElementSibling.nextElementSibling.innerText = "";
+    isSubmitable = true;
+  }
+});
+
+password.addEventListener('input', () => {
+  if (!password.checkValidity()) {
+    password.nextElementSibling.nextElementSibling.innerText = "Password must have at least 8 symbols, at least 1 capital letter, at least one digit (1-9), at least 1 special character (!@#$%)";
+    isSubmitable = false;
+  } else {
+    password.nextElementSibling.nextElementSibling.innerText = "";
+    isSubmitable = true;
+  }
+});
+
+confirmPassword.addEventListener('input', () => {
+  if (password.value !== confirmPassword.value) {
+    confirmPassword.nextElementSibling.nextElementSibling.innerText = "Passwords must match.";
+    isSubmitable = false;
+  } else {
+    confirmPassword.nextElementSibling.nextElementSibling.innerText = "";
+    isSubmitable = true;
+  }
 });
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  inputs.forEach(input => {
+    if(input.value == "") {
+      input.nextElementSibling.nextElementSibling.innerText = "Must be filled.";
+      isSubmitable = false;
+    }
+  });
+
+  if (!isSubmitable) return;
 
   const formData = new FormData();
   formData.append('name', form.elements.name.value);
@@ -32,7 +102,6 @@ form.addEventListener("submit", (e) => {
     body: formData
   })
     .then(response => response.json())
-    .then(data => console.log(data))
     .catch(error => console.error(error));  
 
   console.log("Body: ", formData);
