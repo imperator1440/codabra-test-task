@@ -18,7 +18,7 @@ inputs.forEach(input => input.addEventListener("blur", () => {
   !input.value && input.nextElementSibling.classList.remove("label_focused");
 }));
 
-userName.addEventListener('input', (isSubmitable) => {
+userName.addEventListener('input', () => {
   if (!userName.checkValidity()) {
     userName.nextElementSibling.nextElementSibling.innerText = "Minimum 2 symbols.";
     isSubmitable = false;
