@@ -23,15 +23,13 @@ const inputCheck = (input, message, classToToggle) => {
   input.addEventListener('input', () => {
     if (!input.checkValidity()) {
       input.nextElementSibling.nextElementSibling.innerText = message;
-      isSubmitable = false;
       if (classToToggle) {
-        password.nextElementSibling.nextElementSibling.classList.add(classToToggle);
+        input.nextElementSibling.nextElementSibling.classList.add(classToToggle);
       }
     } else {
       input.nextElementSibling.nextElementSibling.innerText = '';
-      isSubmitable = true;
       if (classToToggle) {
-        password.nextElementSibling.nextElementSibling.classList.remove(classToToggle);
+        input.nextElementSibling.nextElementSibling.classList.remove(classToToggle);
       }
     }
   });
@@ -52,12 +50,9 @@ confirmPassword.addEventListener('input', () => {
 });
 
 const isSubmitableCheck = (inputs) => {
-  for (let i = 0; i < inputs.length; i++) {
-    if (inputs[i].nextElementSibling.nextElementSibling.innerText) {
-      return false;
-    }
-  }
-  return true;
+  return Array.from(inputs).every(input => {
+    return !input.nextElementSibling.nextElementSibling.innerText;
+  });
 };
 
 form.addEventListener('submit', (e) => {
@@ -84,8 +79,16 @@ form.addEventListener('submit', (e) => {
     method: 'POST',
     body: formData
   })
-    .then(response => response.json())
-    .catch(error => console.error(error));  
-
-  console.log('Body: ', formData);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log('Body: ', formData);
+    })
+    .catch(error => {
+      console.error('Error: ', error);
+    });  
 });
