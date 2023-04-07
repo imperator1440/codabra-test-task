@@ -9,6 +9,10 @@ const confirmPassword = inputs[5];
 
 const passwordError = 'Password must have at least 8 symbols, at least 1 capital letter, at least one digit (1-9), at least 1 special character (!@#$%)';
 
+const maxDate = new Date();
+maxDate.setHours(23, 59, 59, 999);
+birth.setAttribute('max', maxDate.toISOString().split("T")[0]); 
+
 inputs.forEach(inputs => inputs.value = '');
 
 inputs.forEach(input => input.addEventListener('focus', () => {
